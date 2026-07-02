@@ -1,49 +1,57 @@
 # opencode-session-follow
 
-OpenCode 的会话记录默认存储在全局 SQLite 数据库中，通过工作目录的路径来匹配。当你把项目文件夹移动位置后，旧会话就「消失」了——数据还在，但路径对不上。
+[![npm](https://img.shields.io/badge/npm-opencode--session--follow-blue)](https://github.com/workdocyeye/opencode-session-follow)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)]()
 
-这个工具解决的就是这个问题：**搬完文件夹后跑一下，把旧会话的路径更新到新位置。**
+OpenCode stores all session history in a global SQLite database. Sessions are associated with projects by their absolute directory path. When you move or rename a project folder, your previous conversations become inaccessible — the data still exists, but the path no longer matches.
 
-## 安装
+This tool restores the connection. Run it after moving a folder, and it updates the stored path to point to the new location.
+
+## Install
 
 ```bash
-# 从 GitHub 安装
-npm i -g https://github.com/workdocyeye/opencode-session-follow
-
-# 或从 npm（以后支持）
-npm i -g opencode-session-follow
+npm install -g https://github.com/workdocyeye/opencode-session-follow
 ```
 
-## 用法
+Verify:
 
 ```bash
-# 进到新目录，自动检测
-cd 新位置/我的项目
+osf --help
+```
+
+## Usage
+
+### Auto mode (folder moved but not renamed)
+
+```bash
+cd new-location/my-project
 osf
-
-# 或手动指定路径
-osf --old "旧位置/我的项目" --new "新位置/我的项目"
 ```
 
-支持全称：
+The tool detects the current directory, finds orphaned sessions with a matching folder name, and updates them.
+
+### Manual mode (folder moved and renamed)
 
 ```bash
-opencode-session-follow --old "旧位置/我的项目" --new "新位置/我的项目"
+osf --old "old-location/my-project" --new "new-location/my-project"
 ```
 
-## 工作原理
+## How it works
 
-读取 OpenCode 的数据库 `~/.local/share/opencode/opencode.db`，执行一条 `UPDATE` 语句将会话记录的 `directory` 和 `path` 字段更新为新路径。仅此而已，不做任何其他修改。
+Reads the OpenCode database at `~/.local/share/opencode/opencode.db` and runs a single `UPDATE` on the matching session row:
 
-## 注意事项
+- `directory` — full path (e.g. `C:/Users/you/.../new-location/my-project`)
+- `path` — relative path (e.g. `Users/you/.../new-location/my-project`)
 
-- **自动模式**通过文件夹名字匹配。只移动不重命名时直接用 `osf` 即可
-- **移动+重命名**了需要用 `--old` / `--new` 手动指定
-- 如果新目录里已经有会话记录，工具会跳过（防止覆盖）
+No other data is read, written, or deleted.
 
-## 零依赖
+## Notes
 
-纯 Node.js，没有任何外部依赖。通过 `sqlite3` 命令行工具操作数据库。
+- **Auto mode** matches by folder name. Works when the folder is only moved, not renamed.
+- **Manual mode** (`--old`/`--new`) works for any scenario, including rename + move.
+- **Safe to re-run**: if the new path already has sessions, the tool skips it.
+- **Cross-platform**: Windows, macOS, Linux.
 
 ## License
 
