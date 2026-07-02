@@ -18,17 +18,17 @@ npm i -g opencode-session-follow
 
 ```bash
 # 进到新目录，自动检测
-cd 集合文件夹/项目A
+cd 新位置/我的项目
 osf
 
 # 或手动指定路径
-osf --old "Desktop/项目A" --new "集合文件夹/项目A"
+osf --old "旧位置/我的项目" --new "新位置/我的项目"
 ```
 
 支持全称：
 
 ```bash
-opencode-session-follow --old "Desktop/项目A" --new "集合文件夹/项目A"
+opencode-session-follow --old "旧位置/我的项目" --new "新位置/我的项目"
 ```
 
 ## 工作原理
