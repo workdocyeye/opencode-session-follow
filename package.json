@@ -1,0 +1,23 @@
+{
+  "name": "opencode-session-follow",
+  "version": "0.1.0",
+  "description": "Fix OpenCode session paths when project folders are moved",
+  "bin": {
+    "opencode-session-follow": "./bin/index.js",
+    "osf": "./bin/index.js"
+  },
+  "files": [
+    "bin/",
+    "src/"
+  ],
+  "dependencies": {},
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/workdocyeye/opencode-session-follow"
+  },
+  "homepage": "https://github.com/workdocyeye/opencode-session-follow",
+  "license": "MIT"
+}
