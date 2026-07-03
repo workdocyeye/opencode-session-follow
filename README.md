@@ -4,6 +4,8 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)]()
 
+[中文文档](./README.zh.md)
+
 OpenCode stores all session history in a global SQLite database. Sessions are associated with projects by their absolute directory path. When you move or rename a project folder, your previous conversations become inaccessible — the data still exists, but the path no longer matches.
 
 This tool restores the connection. Run it after moving a folder, and it updates the stored path to point to the new location.
