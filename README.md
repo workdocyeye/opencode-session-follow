@@ -55,6 +55,14 @@ No other data is read, written, or deleted.
 - **Safe to re-run**: if the new path already has sessions, the tool skips it.
 - **Cross-platform**: Windows, macOS, Linux.
 
+## Uninstall
+
+```bash
+npm uninstall -g opencode-session-follow
+```
+
+This removes the `osf` and `opencode-session-follow` commands. The OpenCode database and your session history are not affected.
+
 ## License
 
 MIT

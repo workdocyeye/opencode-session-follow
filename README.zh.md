@@ -53,6 +53,14 @@ osf --old "旧位置/我的项目" --new "新位置/我的项目"
 - **重复运行安全**：如果新路径已有会话记录，工具会自动跳过
 - **跨平台**：Windows、macOS、Linux 均可使用
 
+## 卸载
+
+```bash
+npm uninstall -g opencode-session-follow
+```
+
+卸载后 `osf` 和 `opencode-session-follow` 命令将不可用。OpenCode 数据库和你的会话记录不受影响。
+
 ## License
 
 MIT
