@@ -33,6 +33,13 @@ function countByDirectory(dir) {
   return parseInt(sqlite3(`.headers off\nSELECT COUNT(*) FROM session WHERE directory = '${esc(dir)}';\n`)) || 0
 }
 
+function findByDirectory(dir) {
+  const rows = sqlite3(`.headers off\nSELECT id, directory, path FROM session WHERE directory = '${esc(dir)}' LIMIT 1;\n`)
+  if (!rows) return null
+  const p = rows.split("|")
+  return p.length >= 2 ? { id: p[0], directory: p[1], path: p[2] || "" } : null
+}
+
 function findOrphan(name, currentDir) {
   const rows = sqlite3(
     `.headers off\nSELECT id, directory, path FROM session WHERE directory LIKE '%${esc(name)}%' AND directory != '${esc(currentDir)}' ORDER BY time_created ASC LIMIT 1;\n`
@@ -48,4 +55,4 @@ function updatePath(oldDir, newDir) {
   return 1
 }
 
-module.exports = { dbPath, countByDirectory, findOrphan, updatePath }
+module.exports = { dbPath, countByDirectory, findByDirectory, findOrphan, updatePath }

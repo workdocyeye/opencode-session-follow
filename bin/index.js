@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const path = require("path")
-const { countByDirectory, findOrphan, updatePath } = require("../src/db")
+const { countByDirectory, findByDirectory, findOrphan, updatePath } = require("../src/db")
 
 const args = process.argv.slice(2)
 const oldIdx = args.indexOf("--old")
@@ -11,10 +11,10 @@ if (oldIdx !== -1 && newIdx !== -1) {
   const newDir = args[newIdx + 1]?.replace(/\\/g, "/")
   if (!oldDir || !newDir) die("Usage: opencode-session-follow --old <path> --new <path>")
   if (countByDirectory(newDir) > 0) { log("当前路径已有会话，无需修复"); process.exit(0) }
-  const orphan = findOrphan(path.basename(newDir), newDir)
-  if (!orphan) { log("未找到匹配的旧会话记录"); process.exit(0) }
-  updatePath(orphan.directory, newDir)
-  log(`已修复: ${orphan.directory} → ${newDir}`)
+  const session = findByDirectory(oldDir)
+  if (!session) { log("未找到匹配的旧会话记录"); process.exit(0) }
+  updatePath(session.directory, newDir)
+  log(`已修复: ${session.directory} → ${newDir}`)
   process.exit(0)
 }
 
