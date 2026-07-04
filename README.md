@@ -12,6 +12,13 @@ This tool restores the connection. Run it after moving a folder, and it updates 
 
 ## Install
 
+### Prerequisites
+
+- **Node.js** 18+
+- **SQLite 3** (`sqlite3` CLI available in PATH)
+
+### Install the tool
+
 ```bash
 npm install -g https://github.com/workdocyeye/opencode-session-follow
 ```
@@ -31,7 +38,7 @@ cd new-location/my-project
 osf
 ```
 
-The tool detects the current directory, finds orphaned sessions with a matching folder name, and updates them.
+The tool detects the current directory, finds orphaned sessions with a matching folder name (prioritizing the most recent ones), and updates them.
 
 ### Manual mode (folder moved and renamed)
 

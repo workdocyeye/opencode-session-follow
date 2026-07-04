@@ -10,6 +10,13 @@ OpenCode 的会话记录默认存储在全局 SQLite 数据库中，通过工作
 
 ## 安装
 
+### 前置要求
+
+- **Node.js** 18+
+- **SQLite 3**（能在终端使用 `sqlite3` 命令）
+
+### 安装工具
+
 ```bash
 npm install -g https://github.com/workdocyeye/opencode-session-follow
 ```
@@ -29,7 +36,7 @@ cd 新位置/我的项目
 osf
 ```
 
-工具自动检测当前目录，查找同名文件夹的旧会话记录并更新路径。
+工具自动检测当前目录，查找同名文件夹的旧会话记录（优先匹配最近的），并更新路径。
 
 ### 手动模式（移动+重命名，或自动匹配失败时）
 

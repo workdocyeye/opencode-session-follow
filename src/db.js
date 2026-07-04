@@ -42,7 +42,7 @@ function findByDirectory(dir) {
 
 function findOrphan(name, currentDir) {
   const rows = sqlite3(
-    `.headers off\nSELECT id, directory, path FROM session WHERE directory LIKE '%${esc(name)}%' AND directory != '${esc(currentDir)}' ORDER BY time_created ASC LIMIT 1;\n`
+    `.headers off\nSELECT id, directory, path FROM session WHERE directory LIKE '%${esc(name)}%' AND directory != '${esc(currentDir)}' ORDER BY time_created DESC LIMIT 1;\n`
   )
   if (!rows) return null
   const p = rows.split("|")
